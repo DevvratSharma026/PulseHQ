@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pulse: #00e5a0;
+  --pulse-dim: #00b07a;
+  --cyan: #00c8ff;
+  --amber: #f5a623;
+  --red: #ff4d6a;
+  --void: #050810;
+  --deep: #080d1a;
+  --surface: #0d1526;
+  --panel: #111c32;
+  --border: #1a2a45;
+  --text: #e2eaf7;
+  --text-muted: #6b82a8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--void);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::selection { background: rgba(0,229,160,0.2); color: var(--pulse); }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes pulseGlow { 0%,100% { box-shadow:0 0 8px rgba(0,229,160,0.3); } 50% { box-shadow:0 0 28px rgba(0,229,160,0.65); } }
+@keyframes scanLine { 0% { transform:translateY(-10%); opacity:0; } 10% { opacity:1; } 90% { opacity:1; } 100% { transform:translateY(110%); opacity:0; } }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+@keyframes barRise { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+@keyframes floatY { 0%,100% { transform:translateY(0px); } 50% { transform:translateY(-8px); } }
+@keyframes gridPulse { 0%,100% { opacity:0.03; } 50% { opacity:0.07; } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes lineGrow { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+@keyframes dotAppear { 0% { r:0; opacity:0; } 60% { r:5; opacity:1; } 100% { r:3.5; opacity:1; } }
+@keyframes numberCount { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideInRight { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+
+.animate-fade-up { animation: fadeUp 0.7s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.5s ease forwards; }
+.animate-glow { animation: pulseGlow 2.5s ease-in-out infinite; }
+.animate-float { animation: floatY 4s ease-in-out infinite; }
+.animate-blink { animation: blink 1.2s steps(1) infinite; }
+.animate-scan { animation: scanLine 4s ease-in-out infinite; }
+.animate-bar-rise { animation: barRise 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-slide-right { animation: slideInRight 0.6s ease forwards; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-900 { animation-delay: 0.9s; }
+.delay-1000 { animation-delay: 1s; }
+.delay-1200 { animation-delay: 1.2s; }
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(26,42,69,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,42,69,0.5) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.glow-text { text-shadow: 0 0 20px rgba(0,229,160,0.5), 0 0 60px rgba(0,229,160,0.2); }
+.glow-cyan  { text-shadow: 0 0 20px rgba(0,200,255,0.5); }
+
+.glass {
+  background: rgba(13, 21, 38, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.hr-pulse { height:1px; background:linear-gradient(90deg, transparent, var(--border), transparent); }
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text-muted) 0%, var(--pulse) 50%, var(--text-muted) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.svg-line-draw { stroke-dasharray: 600; stroke-dashoffset: 600; animation: lineGrow 2s ease forwards; }
+.svg-dot-pop { animation: dotAppear 0.5s ease forwards; }
