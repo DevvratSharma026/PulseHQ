@@ -10,7 +10,7 @@ A fully animated, production-grade SaaS landing page for a Git analytics product
 
 ## Preview
 
-![PulseHQ Hero](https://pulsehq-swart.vercel.app)
+![PulseHQ Hero](public/image.png)
 
 ---
 
